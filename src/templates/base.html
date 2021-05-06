@@ -27,6 +27,13 @@
             <!--  side navbar will be here  -->
         </div>
         <div class="col-md-7">
+          {% if messages %}
+            {% for message in messages %}
+                <div class="aler alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+          {% endif %}
           {% block content %}{% endblock content %}
         </div>
         <div class="col-md-3">
