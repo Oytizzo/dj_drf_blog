@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from .models import Post
 
@@ -25,3 +25,7 @@ class PostListView(ListView):
     # default context object name 'object_list' and '<model>_list'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+
+
+class PostDetailView(DetailView):
+    model = Post
