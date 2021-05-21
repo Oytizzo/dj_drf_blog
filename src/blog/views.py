@@ -26,6 +26,7 @@ class PostListView(ListView):
     # default context object name 'object_list' and '<model>_list'
     context_object_name = 'posts'
     ordering = ['-date_posted']
+    paginate_by = 10
 
 
 class PostDetailView(DetailView):
