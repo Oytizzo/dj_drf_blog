@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "162c70470c6d56d11821d0cbe62476a412784ba977be72e7f9d296e63429cb65"
+            "sha256": "5c78cd2539684f1ecde3335598a36301bffc7d6e4698034510aafaaaa72e83f4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -25,11 +25,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:0a1d195ad65c52bf275b8277b3d49680bd1137a5f55039a806f25f6b9752ce3d",
-                "sha256:18dd3145ddbd04bf189ff79b9954d08fda5171ea7b57bf705789fea766a07d50"
+                "sha256:66c9d8db8cc6fe938a28b7887c1596e42d522e27618562517cc8929eb7e7f296",
+                "sha256:ea735cbbbb3b2fba6d4da4784a0043d84c67c92f1fdf15ad6db69900e792c10f"
             ],
             "index": "pypi",
-            "version": "==3.2.2"
+            "version": "==3.2.4"
         },
         "django-crispy-forms": {
             "hashes": [
@@ -38,6 +38,14 @@
             ],
             "index": "pypi",
             "version": "==1.11.2"
+        },
+        "djangorestframework": {
+            "hashes": [
+                "sha256:6d1d59f623a5ad0509fe0d6bfe93cbdfe17b8116ebc8eda86d45f6e16e819aaf",
+                "sha256:f747949a8ddac876e879190df194b925c177cdeb725a099db1460872f7c0a7f2"
+            ],
+            "index": "pypi",
+            "version": "==3.12.4"
         },
         "pillow": {
             "hashes": [
@@ -59,6 +67,7 @@
                 "sha256:63728564c1410d99e6d1ae8e3b810fe012bc440952168af0a2877e8ff5ab96b9",
                 "sha256:66cc56579fd91f517290ab02c51e3a80f581aba45fd924fcdee01fa06e635812",
                 "sha256:6c32cc3145928c4305d142ebec682419a6c0a8ce9e33db900027ddca1ec39178",
+                "sha256:8b56553c0345ad6dcb2e9b433ae47d67f95fc23fe28a0bde15a120f25257e291",
                 "sha256:8bb1e155a74e1bfbacd84555ea62fa21c58e0b4e7e6b20e4447b8d07990ac78b",
                 "sha256:95d5ef984eff897850f3a83883363da64aae1000e79cb3c321915468e8c6add5",
                 "sha256:a013cbe25d20c2e0c4e85a9daf438f85121a4d0344ddc76e33fd7e3965d9af4b",
