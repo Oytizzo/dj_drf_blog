@@ -1,5 +1,7 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
+from django.contrib.auth.mixins import UserPassesTestMixin
+
 from blog.models import Post
 from .serializers import PostSerializer, PostInputSerializer
 from .paginations import LargeResultsSetPagination, StandardResultsSetPagination
@@ -25,11 +27,23 @@ class PostCreateView(CreateAPIView):
     serializer_class = PostInputSerializer
 
 
-class PostUpdateView(UpdateAPIView):
+class PostUpdateView(UserPassesTestMixin, UpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostInputSerializer
 
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
-class PostDeleteView(DestroyAPIView):
+
+class PostDeleteView(UserPassesTestMixin, DestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
