@@ -1,9 +1,11 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
 from django.contrib.auth.mixins import UserPassesTestMixin
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 
 from blog.models import Post
-from .serializers import PostSerializer, PostInputSerializer
+from .serializers import PostSerializer, PostInputSerializer, UserPostSerializer
 from .paginations import LargeResultsSetPagination, StandardResultsSetPagination
 
 
@@ -14,7 +16,12 @@ class PostListView(ListAPIView):
 
 
 class UserPostListView(ListAPIView):
-    pass
+    serializer_class = UserPostSerializer
+    pagination_class = LargeResultsSetPagination
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostDetailView(RetrieveAPIView):

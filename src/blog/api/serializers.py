@@ -22,3 +22,9 @@ class PostInputSerializer(serializers.ModelSerializer):
         )
         post.save()
         return post
+
+
+class UserPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        exclude = ['author']
