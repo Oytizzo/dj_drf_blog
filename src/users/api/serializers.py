@@ -26,40 +26,56 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ("id", "username", "email", "password",)
 
 
-class PUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = UserModel
-        fields = ['username', 'email']
-
-
-# class ProfileSerializer(serializers.ModelSerializer):
-#     user = ProfileUserSerializer()
-#
-#     class Meta:
-#         model = Profile
-#         fields = ['user', 'image']
-#
-#     def update(self, validated_data):
-#         users_data = validated_data.pop('user')
-#         profile = Profile.objects.create(**validated_data)
-#         for user_data in users_data:
-#             UserModel.objects.create(profile=profile, **user_data)
-#         return profile
-
-
-class ProfileSerializer(serializers.ModelSerializer):
-    user = PUserSerializer()
-
+# testing
+class Prfl(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ['user', 'image']
+        fields = ['image']
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    profile = Prfl()
+
+    class Meta:
+        model = UserModel
+        fields = ['username', 'email', 'profile']
 
     def update(self, instance, validated_data):
-        # users_data = validated_data.pop('user')
-        instance.image = validated_data.get('image', instance.image)
-        # for user_data in users_data:
-        #     instance.user.username = user_data['username']
-        #     instance.user.email = user_data['email']
+        profile_data = validated_data.pop('profile')
+        profile = instance.profile
 
+        instance.username = validated_data.get('username', instance.username)
+        instance.email = validated_data.get('email', instance.email)
         instance.save()
+
+        profile.save()
+
         return instance
+
+
+# stackoverflow
+# class ProfileSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Profile
+#         fields = ['image']
+#
+#
+# class UpdateUserSerializer(serializers.ModelSerializer):
+#     profile = ProfileSerializer()
+#
+#     class Meta:
+#         model = get_user_model()
+#         fields = ['username', 'email', 'profile']
+#
+#     def update(self, instance, validated_data):
+#         # We try to get profile data
+#         profile_data = validated_data.pop('profile', None)
+#         # If we have one
+#         if profile_data is not None:
+#             # We set address, assuming that you always set address
+#             # if you provide profile
+#             instance.profile.address = profile_data['address']
+#             # And save profile
+#             instance.profile.save()
+#         # Rest will be handled by DRF
+#         return super().update(instance, validated_data)
